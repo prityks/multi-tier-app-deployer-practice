@@ -1,4 +1,20 @@
 ---
-- name:
-  hosts:
+- name: Deploy, configure, and populate postgre 12
+  hosts: database_servers
+  become: true
+  gather_facts: false
+  roles:
+        - postgres
+- name: Deploy, configure, and populate flask repo and virtualenv
+  hosts: app_servers
+  become: true
+  roles: 
+         - flask
+- name: Deploy haproxy load balancer 
+  hosts: load_balancers
+  become: true
+  roles:
+        - haproxy
+
+
 
